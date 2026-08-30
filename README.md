@@ -140,6 +140,33 @@ Notes:
 
 ---
 
+## Deploying to Streamlit Community Cloud
+
+Streamlit apps need a persistent server process with WebSocket support, which rules out
+serverless hosts like Vercel. [Streamlit Community Cloud](https://share.streamlit.io) is
+the official free host and is purpose-built for this.
+
+This repo is already set up for it — `requirements.txt` pins the exact package versions
+this project was built and tested with (`scikit-learn==1.7.2` in particular, so the
+pickled model unpickles correctly on the deployed server).
+
+1. Push this repo to GitHub (already done if you're reading this from
+   `github.com/algoarchemist/churn-predictor`).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
+3. Click **New app**, pick this repo, branch `main`, and set the main file path to
+   `app.py`.
+4. Click **Deploy**. First build takes a few minutes (installing `requirements.txt` and
+   loading the 40MB model file).
+5. Once live, upload `WA_Fn-UseC_-Telco-Customer-Churn.csv` through the sidebar exactly
+   as you would locally.
+
+If you want to enable the [email win-back campaign](#email-win-back-campaign) on the
+deployed app, enter your Gmail address and App Password directly in the sidebar at
+runtime — don't commit real credentials into the repo or Streamlit secrets unless you
+intend the deployed app to send email on its own.
+
+---
+
 ## How the model works
 
 Following the pipeline in `churn-predictor-guide.md`:
